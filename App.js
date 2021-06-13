@@ -1,18 +1,29 @@
 import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
+import {StatusBar} from 'expo-status-bar';
 import React from 'react';
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import HomePage from "./Home";
+import {Platform} from "react-native";
+import {useFonts} from "expo-font";
+import AppLoading from "expo-app-loading";
+import Header from "./Header";
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName='Globomantics'>
-          <Stack.Screen name='Globomantics' component={HomePage}/>
-        </Stack.Navigator>
-      </NavigationContainer>
-  );
+    let [fontsLoaded] = useFonts({
+        'OpenSans': require('./assets/fonts/OpenSans-Regular.ttf')
+    })
+    if (!fontsLoaded) {
+        return <AppLoading/>
+    } else {
+        return (
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName='Globomantics'>
+                    <Stack.Screen name='Globomantics' component={HomePage}/>
+                </Stack.Navigator>
+            </NavigationContainer>
+        );
+    }
 }
