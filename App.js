@@ -1,10 +1,9 @@
 import 'react-native-gesture-handler';
-import {StatusBar} from 'expo-status-bar';
 import React from 'react';
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import HomePage from "./Home";
-import {Platform} from "react-native";
+import {Platform, SafeAreaView, StatusBar} from "react-native";
 import {useFonts} from "expo-font";
 import AppLoading from "expo-app-loading";
 import Header from "./Header";
@@ -19,15 +18,17 @@ export default function App() {
         return <AppLoading/>
     } else {
         return (
-            <NavigationContainer
-                style={{paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}
-            >
-                <Stack.Navigator initialRouteName='Globomantics' headerMode='screen'>
-                    <Stack.Screen name='Globomantics' component={HomePage} options={{
-                        header: () => <Header headerDisplay='Globomantics'/>
-                    }}/>
-                </Stack.Navigator>
-            </NavigationContainer>
+            <SafeAreaView style={{flex: 1}}>
+                <NavigationContainer
+                    style={{paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}
+                >
+                    <Stack.Navigator initialRouteName='Globomantics' headerMode='screen'>
+                        <Stack.Screen name='Globomantics' component={HomePage} options={{
+                            header: () => <Header headerDisplay='Globomantics'/>
+                        }}/>
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </SafeAreaView>
         );
     }
 }
