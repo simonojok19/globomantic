@@ -1,6 +1,7 @@
 import React from "react";
 import {StyleSheet, Text, View, TouchableOpacity} from "react-native";
 import * as RootNavigation from './RootNavigation'
+import {navigate} from "./RootNavigation";
 
 export default function Footer() {
     return (
@@ -17,6 +18,7 @@ export default function Footer() {
                 <Text>About</Text>
             </TouchableOpacity>
             <TouchableOpacity
+                onPress={() => RootNavigation.navigate('Quote')}
                 style={styles.button}>
                 <Text>Quote</Text>
             </TouchableOpacity>
