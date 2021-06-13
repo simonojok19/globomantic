@@ -3,10 +3,15 @@ import React from 'react';
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import HomePage from "./Home";
-import {Platform, SafeAreaView, StatusBar} from "react-native";
+import {Platform} from "react-native";
 import {useFonts} from "expo-font";
 import AppLoading from "expo-app-loading";
 import Header from "./Header";
+import {StatusBar} from "expo-status-bar";
+import {navigationRef} from "./RootNavigation"
+import Footer from "./Footer";
+import NewsDetail from "./NewsDetail";
+import AboutGlobo from "./About";
 
 const Stack = createStackNavigator();
 
@@ -18,17 +23,25 @@ export default function App() {
         return <AppLoading/>
     } else {
         return (
-            <SafeAreaView style={{flex: 1}}>
-                <NavigationContainer
-                    style={{paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}
-                >
-                    <Stack.Navigator initialRouteName='Globomantics' headerMode='screen'>
-                        <Stack.Screen name='Globomantics' component={HomePage} options={{
-                            header: () => <Header headerDisplay='Globomantics'/>
-                        }}/>
-                    </Stack.Navigator>
-                </NavigationContainer>
-            </SafeAreaView>
+            <NavigationContainer
+                style={{paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}
+                ref={navigationRef}
+            >
+                <Stack.Navigator initialRouteName='Globomantics' headerMode='screen'>
+                    <Stack.Screen name='Globomantics' component={HomePage} options={{
+                        header: () => <Header headerDisplay='Globomantics'/>
+                    }}/>
+                    <Stack.Screen name="NewsDetail" component={NewsDetail}
+                                  options={{
+                                      header: () => <Header headerDisplay="News"/>
+                                  }}/>
+                    <Stack.Screen name="About" component={AboutGlobo}
+                                  options={{
+                                      header: () => <Header headerDisplay="About Globomantics"/>
+                                  }}/>
+                </Stack.Navigator>
+                <Footer/>
+            </NavigationContainer>
         );
     }
 }
