@@ -12,6 +12,7 @@ import {navigationRef} from "./RootNavigation"
 import Footer from "./Footer";
 import NewsDetail from "./NewsDetail";
 import AboutGlobo from "./About";
+import QuotePage from "./Quote";
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,11 @@ export default function App() {
                     <Stack.Screen name="About" component={AboutGlobo}
                                   options={{
                                       header: () => <Header headerDisplay="About Globomantics"/>
+                                  }}/>
+                    <Stack.Screen name='Quote'
+                                  component={QuotePage}
+                                  options={{
+                                      header: () => <Header headerDisplay='Get a quote'/>
                                   }}/>
                 </Stack.Navigator>
                 <Footer/>
