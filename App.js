@@ -19,9 +19,13 @@ export default function App() {
         return <AppLoading/>
     } else {
         return (
-            <NavigationContainer>
-                <Stack.Navigator initialRouteName='Globomantics'>
-                    <Stack.Screen name='Globomantics' component={HomePage}/>
+            <NavigationContainer
+                style={{paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}
+            >
+                <Stack.Navigator initialRouteName='Globomantics' headerMode='screen'>
+                    <Stack.Screen name='Globomantics' component={HomePage} options={{
+                        header: () => <Header headerDisplay='Globomantics'/>
+                    }}/>
                 </Stack.Navigator>
             </NavigationContainer>
         );
